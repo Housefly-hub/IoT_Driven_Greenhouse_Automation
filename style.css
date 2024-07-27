@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    overflow:hidden;
+}
+
+
+
+header {
+    height:50px;
+    background-color: beige;
+    color:orange;
+    text-align: center;
+    font-family:'Times New Roman', Times, serif;
+
+}
+li{
+    color:blue;
+    font-weight: bolder;
+}
+.list{
+    margin-top:20px;
+    color:Blue;
+    font-weight:bolder;
+}
+
+ul { margin :0;
+    height:80vh;
+    background-color:hsl(166, 47%, 66%);
+}
+
+footer{
+    display:grid;
+    height:12vh;
+    grid-template-columns: 33% 33% 33%;
+    background-color:orange;
+    color:beige;
+    justify-content: center;
+}
+
+p {
+    width:33%;
+    justify-self:center;
+    
+
+}
+

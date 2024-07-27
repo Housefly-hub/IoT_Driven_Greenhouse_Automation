@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="400"
+   height="400"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="IoT_Driven_Greenhouse_Automation_Logo.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.0275"
+     inkscape:cx="199.75339"
+     inkscape:cy="185.69667"
+     inkscape:window-width="1920"
+     inkscape:window-height="1046"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <!-- Background Circle -->
+  <circle
+     cx="199.50679"
+     cy="193.09496"
+     r="180"
+     fill="#f5f5dc"
+     stroke="saffron"
+     stroke-width="5"
+     id="circle1" />
+  <!-- Greenhouse Structure -->
+  <polygon
+     points="150,300 250,300 250,200 200,150 150,200"
+     fill="none"
+     stroke="saffron"
+     stroke-width="5"
+     id="polygon1" />
+  <!-- Plants -->
+  <line
+     x1="170"
+     y1="300"
+     x2="170"
+     y2="240"
+     stroke="saffron"
+     stroke-width="5"
+     id="line1" />
+  <circle
+     cx="107.11467"
+     cy="264.77191"
+     fill="saffron"
+     id="circle2"
+     r="39.346485"
+     style="fill:#ff0000;stroke-width:3.93465" />
+  <line
+     x1="230"
+     y1="300"
+     x2="230"
+     y2="240"
+     stroke="saffron"
+     stroke-width="5"
+     id="line2" />
+  <ellipse
+     cx="275.86929"
+     cy="240.60419"
+     fill="saffron"
+     id="circle3"
+     style="fill:#ff0000;stroke-width:5.94164"
+     rx="61.294697"
+     ry="57.595562" />
+  <!-- IoT Symbol (Wi-Fi Signal) -->
+  <path
+     d="M 200 110 C 220 110, 240 130, 240 150"
+     stroke="saffron"
+     stroke-width="5"
+     fill="none"
+     id="path3" />
+  <path
+     d="M 200 130 C 220 130, 230 140, 230 150"
+     stroke="saffron"
+     stroke-width="5"
+     fill="none"
+     id="path4" />
+  <ellipse
+     cx="142.54005"
+     cy="124.35265"
+     fill="saffron"
+     id="circle4"
+     style="fill:#ff0000;stroke-width:12.9586"
+     rx="65.912453"
+     ry="63.69297" />
+  <!-- Text -->
+</svg>

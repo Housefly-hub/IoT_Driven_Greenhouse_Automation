@@ -2,33 +2,84 @@
     margin: 0;
     padding: 0;
 }
+::selection{
+    color:beige;
+    background-color:lightsalmon;
+}
 body{
     overflow:hidden;
 }
 
-
-
 header {
-    height:50px;
-    background-color: beige;
+    height:10vh;
+    background-color:beige;
     color:orange;
     text-align: center;
     font-family:'Times New Roman', Times, serif;
+    text-shadow:2px 2px 5px lightsalmon;
 
 }
-li{
-    color:blue;
+.logo-container{
+    margin-left:5px;
+    float:left;
+    height:10vh;
+    width:10vh;
+}
+.logo{
+    height:10vh;
+    border-radius:50%;
+    box-shadow:2px 2px 5px lightsalmon
+}
+.main-body{
+    width:auto;
+    height:80vh;
+    background-color: #c56200;
+    color:beige;
+    font-size:18px;
+    border-top:2px solid lightsalmon;
+}
+.temperature, .soilMoisture, .fanSpeed, .lighting {
+    height:20vh;
+    border:1px solid white;
+}
+table{
+    font-size:small;
+    height:70%;
+    margin:auto
+}
+table,td {
+    border:2px solid beige;
+    border-collapse: collapse;
+    padding:0px 2px;
+    box-shadow:3px 3px 5px lightsalmon
+}
+td{
+    min-width:70px;
+    text-align: center;
+}
+.temperature td:nth-child(1)
+{
+    width:100px;
+}
+.main-body td:nth-child(1):hover
+{
+    color: #c56200;
+    background-color:lightsalmon;
+
+}
+/* li{
+    color:#c56200;
     font-weight: bolder;
 }
 .list{
     margin-top:20px;
-    color:Blue;
+    color:#c56200;
     font-weight:bolder;
-}
+} */
 
 ul { margin :0;
     height:80vh;
-    background-color:hsl(166, 47%, 66%);
+    background-color:hsl(67, 63%, 81%);
 }
 
 footer{
@@ -37,11 +88,14 @@ footer{
     grid-template-columns: 33% 33% 33%;
     background-color:orange;
     color:beige;
-    justify-content: center;
+    align-items:center;
+    justify-items:center;
+    border:1px solid grey;
 }
 
 p {
-    width:33%;
+    height:fit-content;
+    width:fit-content;
     justify-self:center;
     
 

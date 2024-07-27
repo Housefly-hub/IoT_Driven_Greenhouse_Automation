@@ -6,22 +6,22 @@
     color:beige;
     background-color:lightsalmon;
 }
-body{
-    overflow:hidden;
-}
 
 header {
+    display:grid;
+    grid-template-columns:10% 90%;
     height:10vh;
     background-color:beige;
     color:orange;
     text-align: center;
     font-family:'Times New Roman', Times, serif;
     text-shadow:2px 2px 5px lightsalmon;
+    justify-content: space-around;
+
 
 }
 .logo-container{
     margin-left:5px;
-    float:left;
     height:10vh;
     width:10vh;
 }

@@ -154,7 +154,16 @@ input[type='range']:active{
 } */
 .fan-animation{
     float:right;
-    animation: fan-rotate 1s infinite;
+    width:50px;
+    border:2px solid;
+    border-radius:50%;
+    height:50px;
+    border-top-color:red;
+    border-left-color:green;
+    border-bottom-color:blue;
+    border-right-color:yellow;
+
+    animation: fan-rotate 800ms infinite;
 }
 
 @keyframes fan-rotate {

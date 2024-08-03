@@ -41,7 +41,14 @@
         <table>
             <tr>
                 <td>Fan Speed (RPM)</td>
-                <td> 500 RPM</td>
+                <td> 500 RPM
+                    <br>
+                    <div class="fan-speed-slider">
+  <label for="fan-speed">Fan Speed:</label>
+  0<input type="range" id="fan-speed" min="0" max="1000" value="100" step="1">
+  <span id="fan-speed-value">1000</span>
+</div>
+                </td>
             </tr>
         </table>
     </section>
@@ -50,7 +57,11 @@
         <table>
             <tr>
                 <td>Luminous Intensity</td>
-                <td> 50 CD</td>
+                <td> 50 CD
+                    <br>
+                    <input type="button" value="On">
+                    <input type="button" value="Off"
+                </td>
             </tr>
         </table>
     </section>

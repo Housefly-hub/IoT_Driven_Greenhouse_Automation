@@ -44,13 +44,15 @@
                 <td> <span id="fan-rpm">100</span> RPM <br>
                     <div class="fan-speed-slider">
   <label for="fan-speed">Fan Speed:</label>
-  0<input type="range" id="fan-speed" min="0" max="1000" value="100" step="1">
+  0<input type="range" id="fan-speed" min="0" max="1000" value="100" step="100">
   <span id="fan-speed-value">1000</span>
 </div>
                 </td>
                 <td>
-                    <div class="fan-animation">
-            <img src="./images/pankha.png" alt="pankha" height="50px">
+                    <div >
+            <img id="fan-animation" style="animation-name:fan-rotate;
+    animation-duration: 0.4s;
+    animation-iteration-count: infinite;"src="./images/pankha.png" alt="pankha" height="50px">
 
         </div>
                 </td>
@@ -65,8 +67,10 @@
                 <td>Luminous Intensity</td>
                 <td> 50 CD
                     <br>
-                    <input type="button" value="On">
-                    <input type="button" value="Off">
+                    <button id="on">On</button>
+                    <button id="off">OFF</button>
+                    <!-- <input type="button" value="On">
+                    <input type="button" value="Off"> -->
                 </td>
             </tr>
         </table>

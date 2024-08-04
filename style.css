@@ -9,7 +9,7 @@
     color:beige;
     background-color:lightsalmon;
 }
-input[type='button']{
+button{
     padding:5px;
     min-width:40px;
     border-radius:25px;
@@ -17,14 +17,39 @@ input[type='button']{
     border-color:#c56200;
 
 }
-input[value='On']{
+
+#on{
     background-color:hsl(134, 61%, 42%);
     
 }
-input[value='Off']{
-    background-color:hsl(0, 61%, 42%);
+#on:hover{
+    background-color:hsl(134, 51%, 68%);
+    color:orange;
+    
+}
+#on:active{
+    background-color:#c56200;
+    border:2px solid whitesmoke;
+    color:orange;
+    
 }
 
+#off{
+    background-color:hsl(0, 61%, 42%);
+    
+}
+#off:hover{
+    background-color:hsl(0, 51%, 68%);
+    color:orange;
+    
+}
+#off:active{
+    background-color:#c56200;
+    border:2px solid whitesmoke;
+
+    color:orange;
+    
+}
 header {
     display:grid;
     grid-template-columns:10% 90%;
@@ -114,16 +139,14 @@ input[type='range']{
     accent-color:hsl(0, 63%, 46%)
 }
 input[type='range']:hover{
-    accent-color:hsl(226, 63%, 46%)
+    accent-color:hsl(30, 90%, 53%);
 }
 input[type='range']:active{
-    accent-color:hsl(46, 63%, 46%)
-}
-.fanSpeed table tr td:nth-child(3) {
-    border-radius:2px;
+    accent-color:hsl(192, 73%, 63%)
 }
 
-.fan-animation{
+
+#fan-animation{
     float:right;
     width:50px;
     border:2px solid;
@@ -133,7 +156,7 @@ input[type='range']:active{
     border-left-color:green;
     border-bottom-color:blue;
     border-right-color:yellow;
-     animation: fan-rotate 800ms infinite;
+    
 }
 
 @keyframes fan-rotate {

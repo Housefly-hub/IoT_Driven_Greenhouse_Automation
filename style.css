@@ -119,39 +119,10 @@ input[type='range']:hover{
 input[type='range']:active{
     accent-color:hsl(46, 63%, 46%)
 }
-
-/* .fan-speed-slider {
-  width: 300px;
+.fanSpeed table tr td:nth-child(3) {
+    border-radius:2px;
 }
 
-
-.fan-speed-slider input[type="range"] {
-  width: 100%;
-  height: 20px;
-  border-radius: 10px;
-  background-color: #8cd840;
-  -webkit-appearance: none;
-}
-
-.fan-speed-slider input[type="range"]::-webkit-slider-thumb {
-  width: 20px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #bf4a17;
-  cursor: pointer;
-}
-
-.fan-speed-slider input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #ce1d1d;
-  cursor: pointer;
-}
-
-.fan-speed-slider #fan-speed-value {
-  font-size: 18px;
-} */
 .fan-animation{
     float:right;
     width:50px;
@@ -162,8 +133,7 @@ input[type='range']:active{
     border-left-color:green;
     border-bottom-color:blue;
     border-right-color:yellow;
-
-    animation: fan-rotate 800ms infinite;
+     animation: fan-rotate 800ms infinite;
 }
 
 @keyframes fan-rotate {

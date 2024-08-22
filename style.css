@@ -9,6 +9,10 @@
     color:beige;
     background-color:lightsalmon;
 }
+h1 {
+    font-size:4vw;
+    align-content:center;
+}
 button{
     padding:5px;
     min-width:40px;

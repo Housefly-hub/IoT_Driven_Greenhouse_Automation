@@ -1,0 +1,29 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1000"
+  height="300"
+  viewBox="0 0 100 300"
+>
+  <!-- Thermometer Outline -->
+  <rect x="40" y="10" width="20" height="250" fill="#ccc" stroke="#333" stroke-width="2"/>
+  <circle cx="50" cy="270" r="30" fill="#ccc" stroke="#333" stroke-width="2"/>
+  
+  <!-- Temperature Sections -->
+  <!-- 0 to 20 degrees -->
+  <rect x="40" y="220" width="20" height="40" fill="#00f"/>
+  
+  <!-- 20 to 50 degrees -->
+  <rect x="40" y="130" width="20" height="90" fill="#0f0"/>
+  
+  <!-- 50 to 100 degrees -->
+  <rect x="40" y="10" width="20" height="120" fill="#f00"/>
+  
+  <!-- Bulb -->
+  <circle cx="50" cy="270" r="25" fill="#f00"/>
+  
+  <!-- Text Labels -->
+  <text x="70" y="230" font-family="Arial" font-size="12" fill="#333">0</text>
+  <text x="70" y="180" font-family="Arial" font-size="12" fill="#333">20</text>
+  <text x="70" y="110" font-family="Arial" font-size="12" fill="#333">50</text>
+  <text x="70" y="20" font-family="Arial" font-size="12" fill="#333">100</text>
+</svg>

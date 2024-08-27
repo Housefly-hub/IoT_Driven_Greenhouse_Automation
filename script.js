@@ -35,3 +35,23 @@ fan_speed.addEventListener('input', function () {
     }
     
 });
+
+function toggle() {
+    const lightIntensity = document.getElementById("light-intensity");
+    const toggleButton = document.getElementById("toggle-button");
+    const lightToggle = document.getElementById("light-svg");
+    if (toggleButton.value === 'OFF') {
+        toggleButton.value = 'ON';
+        toggleButton.innerText = 'OFF'
+        toggleButton.style.color = 'Red';
+        lightIntensity.innerHTML = '50';
+        lightToggle.src= './images/light_off.svg'
+    }
+    else {
+        toggleButton.value = 'OFF';
+        toggleButton.innerText = 'ON';
+        toggleButton.style.color = 'Green';
+        lightIntensity.innerHTML = '0'
+        lightToggle.src='./images/light_on.svg'
+    }
+}

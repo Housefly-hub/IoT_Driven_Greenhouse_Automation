@@ -148,6 +148,21 @@ input[type='range']:hover{
 input[type='range']:active{
     accent-color:hsl(192, 73%, 63%)
 }
+#toggle-button {
+    width:5vw;
+    color:Crimson;
+    font-family:'Times New Roman', Times, serif;
+    font-weight:bolder;
+    background-color:beige;
+    border:2px solid orange;
+    
+}
+#toggle-button:hover{
+    color:beige;
+    background-color:orange;
+    box-shadow:2px 1px 5px lightcoral;
+
+}
 
 
 #fan-animation{

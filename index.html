@@ -65,12 +65,14 @@
         <table>
             <tr>
                 <td>Luminous Intensity</td>
-                <td> 50 CD
+                <td> <span id="light-intensity">50</span> CD
                     <br>
-                    <button id="on">On</button>
-                    <button id="off">OFF</button>
-                    <!-- <input type="button" value="On">
-                    <input type="button" value="Off"> -->
+                    <button id="toggle-button" onclick="toggle()" value="OFF">OFF</button>
+                </td>
+                <td>
+                    <div id="light">
+                        <img id="light-svg" src="./images/light_on.svg" height="50">
+                    </div>
                 </td>
             </tr>
         </table>

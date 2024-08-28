@@ -45,13 +45,15 @@ function toggle() {
         toggleButton.innerText = 'OFF'
         toggleButton.style.color = 'Red';
         lightIntensity.innerHTML = '50';
-        lightToggle.src= './images/light_off.svg'
+        lightToggle.src = './images/light_off.svg';
+        lightToggle.height = '25';
     }
     else {
         toggleButton.value = 'OFF';
         toggleButton.innerText = 'ON';
         toggleButton.style.color = 'Green';
         lightIntensity.innerHTML = '0'
-        lightToggle.src='./images/light_on.svg'
+        lightToggle.src = './images/light_on.svg'
+        lightToggle.height = '50';
     }
 }

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import random
 from matplotlib import style
 
-style.use('seaborn-vibrant')
+style.use('seaborn-darkgrid')  # or 'seaborn-bright' if you prefer a lighter palette
 
 # Load data and models
 df = pd.read_csv("weather_data.csv")

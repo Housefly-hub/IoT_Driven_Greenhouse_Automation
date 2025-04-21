@@ -2,23 +2,25 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-from datetime import datetime, timedelta
+from datetime import datetime
 
-# Load models
+# --- Load Models ---
 with open("temp_model.pkl", "rb") as f:
     temp_model = pickle.load(f)
 
 with open("rain_model.pkl", "rb") as f:
     rain_model = pickle.load(f)
 
-# Load historical data to get recent lag features
+# --- Load Data for Recent Lag Features ---
 df = pd.read_csv("weather_data.csv")
 df['DATE'] = pd.to_datetime(df['DATE'])
 df = df.sort_values('DATE')
+
+# Fill missing values
 df[['PRCP', 'TMAX', 'TMIN']] = df[['PRCP', 'TMAX', 'TMIN']].fillna(method='ffill').fillna(method='bfill')
 df['TAVG'] = df['TAVG'].fillna((df['TMAX'] + df['TMIN']) / 2)
 
-# Generate lag features (7 days) for latest date
+# --- Function to Get Lag Features ---
 def get_recent_lag_features():
     recent = df.tail(7).copy()
     features = {}
@@ -29,34 +31,44 @@ def get_recent_lag_features():
 
     return pd.DataFrame([features])
 
-# Streamlit UI
-st.title("🌤️ Weather Predictor")
-st.write("Enter a future date to predict average temperature and chance of rainfall.")
+# --- Streamlit UI ---
+st.set_page_config(page_title="Weather Predictor", layout="centered")
+st.title("🌤️ Weather Forecast App")
+st.markdown("Predict **Average Temperature** and **Rainfall** for a future date using past weather trends.")
 
-# Input
-day = st.number_input("Day", min_value=1, max_value=31, value=1)
-month = st.selectbox("Month", list(range(1, 13)))
+# Date Picker
+selected_date = st.date_input("📅 Select a future date", min_value=datetime.now().date())
 
-if st.button("Predict"):
+# Prediction Button
+if st.button("Predict Weather"):
     try:
-        today = df['DATE'].max()
-        target_date = datetime(today.year + (1 if month < today.month or (month == today.month and day <= today.day) else 0), month, day)
-
-        # Use latest available lag features
-        features = get_recent_lag_features()
-
-        # Predict
-        temp_pred = temp_model.predict(features)[0]
-        rain_pred = rain_model.predict(features)[0]
-
-        # Output
-        st.success(f"📅 Prediction for {target_date.strftime('%B %d')}:")
-        st.metric("🌡️ Avg. Temperature (°C)", f"{temp_pred:.2f}")
-        st.metric("🌧️ Expected Rainfall (mm)", f"{rain_pred:.2f}")
-        if rain_pred > 1:
-            st.warning("☔ Likely to Rain")
+        today = df['DATE'].max().date()
+        if selected_date <= today:
+            st.warning("Please select a **future** date.")
         else:
-            st.info("🌤️ Less Chance of Rain")
+            # Get lag features
+            features = get_recent_lag_features()
+
+            # Predict
+            temp_f = temp_model.predict(features)[0]
+            rain_inch = rain_model.predict(features)[0]
+
+            # Convert units
+            temp_c = (temp_f - 32) * 5 / 9
+            rain_mm = rain_inch * 25.4
+
+            # Display results
+            st.success(f"📅 Prediction for {selected_date.strftime('%B %d, %Y')}:")
+            st.metric("🌡️ Avg. Temperature", f"{temp_c:.2f} °C")
+            st.metric("🌧️ Rainfall", f"{rain_mm:.2f} mm")
+
+            # Rain description
+            if rain_mm > 25:
+                st.warning("☔ Heavy Rain Expected")
+            elif rain_mm > 1:
+                st.info("🌦️ Light Rain Possible")
+            else:
+                st.info("🌤️ Little or No Rain Expected")
 
     except Exception as e:
-        st.error(f"Error: {str(e)}")
+        st.error(f"An error occurred: {str(e)}")

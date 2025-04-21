@@ -2,73 +2,85 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
-from datetime import datetime
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
 
-# --- Load Models ---
+# Load data and models
+df = pd.read_csv("weather_data.csv")
+df['DATE'] = pd.to_datetime(df['DATE'])
+
 with open("temp_model.pkl", "rb") as f:
     temp_model = pickle.load(f)
-
 with open("rain_model.pkl", "rb") as f:
     rain_model = pickle.load(f)
 
-# --- Load Data for Recent Lag Features ---
-df = pd.read_csv("weather_data.csv")
-df['DATE'] = pd.to_datetime(df['DATE'])
-df = df.sort_values('DATE')
-
-# Fill missing values
-df[['PRCP', 'TMAX', 'TMIN']] = df[['PRCP', 'TMAX', 'TMIN']].fillna(method='ffill').fillna(method='bfill')
-df['TAVG'] = df['TAVG'].fillna((df['TMAX'] + df['TMIN']) / 2)
-
-# --- Function to Get Lag Features ---
 def get_recent_lag_features():
     recent = df.tail(7).copy()
     features = {}
-
     for i in range(7):
         features[f'TAVG_lag_{i+1}'] = recent.iloc[-(i+1)]['TAVG']
         features[f'PRCP_lag_{i+1}'] = recent.iloc[-(i+1)]['PRCP']
-
     return pd.DataFrame([features])
 
-# --- Streamlit UI ---
-st.set_page_config(page_title="Weather Predictor", layout="centered")
-st.title("🌤️ Weather Forecast App")
-st.markdown("Predict **Average Temperature** and **Rainfall** for a future date using past weather trends.")
+def predict_weather():
+    features = get_recent_lag_features()
+    temp_f = temp_model.predict(features)[0]
+    temp_c = (temp_f - 32) * 5 / 9
+    rain_inch = rain_model.predict(features)[0]
+    rain_mm = rain_inch * 25.4
+    return round(temp_c, 2), round(rain_mm, 2)
 
-# Date Picker
-selected_date = st.date_input("📅 Select a future date", min_value=datetime.now().date())
+def plot_temp_trend():
+    past_5 = df.tail(5)[['DATE', 'TAVG']].copy()
+    past_5['Type'] = 'Past'
+    past_5['Temp_C'] = (past_5['TAVG'] - 32) * 5 / 9
 
-# Prediction Button
-if st.button("Predict Weather"):
-    try:
-        today = df['DATE'].max().date()
-        if selected_date <= today:
-            st.warning("Please select a **future** date.")
-        else:
-            # Get lag features
-            features = get_recent_lag_features()
+    future_preds = []
+    features = get_recent_lag_features()
+    for i in range(5):
+        temp_f = temp_model.predict(features)[0]
+        temp_c = (temp_f - 32) * 5 / 9
+        future_date = df['DATE'].max() + pd.Timedelta(days=i+1)
+        future_preds.append({'DATE': future_date, 'Temp_C': temp_c, 'Type': 'Future'})
+        for j in range(6, 0, -1):
+            features[f'TAVG_lag_{j+1}'] = features[f'TAVG_lag_{j}']
+        features['TAVG_lag_1'] = temp_f
 
-            # Predict
-            temp_f = temp_model.predict(features)[0]
-            rain_inch = rain_model.predict(features)[0]
+    future_df = pd.DataFrame(future_preds)
+    temp_plot_df = pd.concat([past_5[['DATE', 'Temp_C', 'Type']], future_df], ignore_index=True)
 
-            # Convert units
-            temp_c = (temp_f - 32) * 5 / 9
-            rain_mm = rain_inch * 25.4
+    fig, ax = plt.subplots(figsize=(10, 4))
+    for label, grp in temp_plot_df.groupby('Type'):
+        ax.plot(grp['DATE'], grp['Temp_C'], marker='o', label=label)
+    ax.axvline(x=datetime.now(), color='gray', linestyle='--', alpha=0.6)
+    ax.set_title("Past 5 Days and Predicted 5 Days Avg Temperature (°C)")
+    ax.set_ylabel("Temperature (°C)")
+    ax.set_xlabel("Date")
+    ax.grid(True)
+    ax.legend()
+    plt.xticks(rotation=45)
+    st.pyplot(fig)
 
-            # Display results
-            st.success(f"📅 Prediction for {selected_date.strftime('%B %d, %Y')}:")
-            st.metric("🌡️ Avg. Temperature", f"{temp_c:.2f} °C")
-            st.metric("🌧️ Rainfall", f"{rain_mm:.2f} mm")
+# Streamlit UI
+st.title("🌦️ Weather Prediction App")
+st.write("Predict future temperature and rainfall based on past data.")
 
-            # Rain description
-            if rain_mm > 25:
-                st.warning("☔ Heavy Rain Expected")
-            elif rain_mm > 1:
-                st.info("🌦️ Light Rain Possible")
-            else:
-                st.info("🌤️ Little or No Rain Expected")
+# Date selection
+date_input = st.date_input("Select a date to view/predict weather:", min_value=df['DATE'].min().date(), max_value=(df['DATE'].max() + timedelta(days=5)).date())
 
-    except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
+if date_input <= df['DATE'].max().date():
+    # Show past temperature
+    past_record = df[df['DATE'].dt.date == date_input]
+    if not past_record.empty:
+        temp_c = (past_record['TAVG'].values[0] - 32) * 5 / 9
+        rain_mm = past_record['PRCP'].values[0] * 25.4
+        st.metric("📅 Past Temperature (°C)", f"{round(temp_c, 2)} °C")
+        st.metric("🌧️ Past Rainfall (mm)", f"{round(rain_mm, 2)} mm")
+    else:
+        st.warning("No data available for selected date.")
+else:
+    # Predict future weather
+    temp_c, rain_mm = predict_weather()
+    st.metric("🌡️ Predicted Temperature (°C)", f"{temp_c} °C")
+    st.metric("☔ Predicted Rainfall (mm)", f"{rain_mm} mm")
+    plot_temp_trend()

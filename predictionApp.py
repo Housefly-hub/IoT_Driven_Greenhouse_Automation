@@ -55,7 +55,7 @@ def plot_temp_trend(inquiry_date):
             temp_f = temp_model.predict(features)[0]
             temp_c = (temp_f - 32) * 5 / 9
             future_date = inquiry_date + timedelta(days=i)
-            future_preds.append({'DATE': future_date, 'Temp_C': temp_c, 'Type': 'Future'}))
+            future_preds.append({'DATE': future_date, 'Temp_C': temp_c, 'Type': 'Future'})
             for j in range(6, 0, -1):
                 features[f'TAVG_lag_{j+1}'] = features[f'TAVG_lag_{j}']
             features['TAVG_lag_1'] = temp_f

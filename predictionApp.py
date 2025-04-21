@@ -19,16 +19,30 @@ with open("temp_model.pkl", "rb") as f:
 with open("rain_model.pkl", "rb") as f:
     rain_model = pickle.load(f)
 
+# def get_recent_lag_features(start_date=None):
+#     if start_date:
+#         recent = df[df['DATE'] < start_date].tail(7).copy()
+#     else:
+#         recent = df.tail(7).copy()
+#     features = {}
+#     for i in range(7):
+#         features[f'TAVG_lag_{i+1}'] = recent.iloc[-(i+1)]['TAVG'] if i < len(recent) else 60
+#         features[f'PRCP_lag_{i+1}'] = recent.iloc[-(i+1)]['PRCP'] if i < len(recent) else 0
+#     return pd.DataFrame([features])
 def get_recent_lag_features(start_date=None):
+    # Convert start_date to pandas Timestamp if it's provided
     if start_date:
+        start_date = pd.to_datetime(start_date)
         recent = df[df['DATE'] < start_date].tail(7).copy()
     else:
         recent = df.tail(7).copy()
+
     features = {}
     for i in range(7):
         features[f'TAVG_lag_{i+1}'] = recent.iloc[-(i+1)]['TAVG'] if i < len(recent) else 60
         features[f'PRCP_lag_{i+1}'] = recent.iloc[-(i+1)]['PRCP'] if i < len(recent) else 0
     return pd.DataFrame([features])
+
 
 def predict_weather(start_date=None):
     features = get_recent_lag_features(start_date)
